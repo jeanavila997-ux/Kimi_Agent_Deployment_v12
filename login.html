@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- CSP restritiva -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://*.supabase.co;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    connect-src 'self' https://*.supabase.co;
+    img-src 'self' data:;
+  ">
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/auth-gateway.css">
+
+  <title>Login — TDAH Descomplicado</title>
+</head>
+<body>
+  <!-- Disclaimer -->
+  <div class="disclaimer-bar">
+    <span class="disclaimer-icon">⚕️</span>
+    <p>Este conteúdo é educativo e não substitui orientação médica profissional.</p>
+  </div>
+
+  <div class="app-container" style="align-items:center;justify-content:center;min-height:calc(100vh - 40px);">
+    <div class="auth-gateway">
+      <div class="auth-header">
+        <div class="auth-logo">🧠</div>
+        <h1 class="auth-title">TDAH Descomplicado</h1>
+        <p class="auth-subtitle">Acesse seu ebook interativo</p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="login">Entrar</button>
+        <button class="auth-tab" data-tab="register">Criar conta</button>
+        <button class="auth-tab" data-tab="magic">Magic Link</button>
+      </div>
+
+      <!-- Login form -->
+      <form class="auth-form" id="form-login">
+        <div class="form-group">
+          <label class="form-label" for="login-email">Email</label>
+          <input type="email" id="login-email" name="email" placeholder="seu@email.com" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="login-password">Senha</label>
+          <input type="password" id="login-password" name="password" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Entrar</button>
+      </form>
+
+      <!-- Register form -->
+      <form class="auth-form" id="form-register" style="display:none;">
+        <div class="form-group">
+          <label class="form-label" for="reg-name">Nome completo</label>
+          <input type="text" id="reg-name" name="name" placeholder="Seu nome" required autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reg-email">Email</label>
+          <input type="email" id="reg-email" name="email" placeholder="seu@email.com" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reg-password">Senha</label>
+          <input type="password" id="reg-password" name="password" placeholder="Mínimo 6 caracteres" required minlength="6" autocomplete="new-password">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Criar conta</button>
+      </form>
+
+      <!-- Magic link form -->
+      <form class="auth-form" id="form-magic" style="display:none;">
+        <div class="form-group">
+          <label class="form-label" for="magic-email">Email</label>
+          <input type="email" id="magic-email" name="email" placeholder="seu@email.com" required autocomplete="email">
+          <span class="form-hint">Enviaremos um link mágico para seu email</span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Enviar link mágico</button>
+      </form>
+
+      <!-- Success message (magic link) -->
+      <div class="magic-link-sent" id="magic-success" style="display:none;">
+        <div class="magic-link-icon">✉️</div>
+        <h3>Link enviado!</h3>
+        <p style="color:var(--text-secondary);font-size:0.875rem;">Verifique seu email e clique no link para entrar.</p>
+      </div>
+
+      <div class="auth-divider">ou</div>
+
+      <div style="text-align:center;">
+        <a href="index.html" class="btn btn-outline" style="width:100%;">
+          ← Voltar para o ebook
+        </a>
+      </div>
+
+      <p style="text-align:center;font-size:0.75rem;color:var(--text-muted);margin-top:2rem;">
+        Ao acessar, você concorda com nossa <a href="privacidade.html" style="color:var(--color-primary);">Política de Privacidade</a>.
+      </p>
+    </div>
+  </div>
+
+  <script type="module">
+    import { CONFIG } from './js/config.js';
+
+    // Tabs
+    document.querySelectorAll('.auth-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const name = tab.dataset.tab;
+        document.getElementById('form-login').style.display = name === 'login' ? 'flex' : 'none';
+        document.getElementById('form-register').style.display = name === 'register' ? 'flex' : 'none';
+        document.getElementById('form-magic').style.display = name === 'magic' ? 'flex' : 'none';
+        document.getElementById('magic-success').style.display = 'none';
+      });
+    });
+
+    // Login
+    document.getElementById('form-login')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = e.target.email.value;
+      const password = e.target.password.value;
+
+      if (!CONFIG.isSupabaseEnabled) {
+        // Modo offline
+        const saved = localStorage.getItem('tdah-ebook:user');
+        const user = saved ? JSON.parse(saved) : null;
+        if (user && user.email === email) {
+          localStorage.setItem('tdah-ebook:authToken', 'local-token');
+          window.location.href = 'index.html';
+          return;
+        }
+        alert('Email ou senha incorretos (modo offline)');
+        return;
+      }
+
+      // Com Supabase — carrega SDK dinamicamente
+      try {
+        const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
+        const sb = createClient(CONFIG.supabase.url, CONFIG.supabase.anonKey);
+        const { error } = await sb.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        window.location.href = 'index.html';
+      } catch (err) {
+        alert('Erro: ' + err.message);
+      }
+    });
+
+    // Register
+    document.getElementById('form-register')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = e.target.name.value;
+      const email = e.target.email.value;
+      const password = e.target.password.value;
+
+      if (!CONFIG.isSupabaseEnabled) {
+        const user = { email, id: 'local-' + Date.now(), full_name: name };
+        localStorage.setItem('tdah-ebook:user', JSON.stringify(user));
+        localStorage.setItem('tdah-ebook:authToken', 'local-token');
+        alert('Conta criada! (modo offline)');
+        window.location.href = 'index.html';
+        return;
+      }
+
+      try {
+        const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
+        const sb = createClient(CONFIG.supabase.url, CONFIG.supabase.anonKey);
+        const { error } = await sb.auth.signUp({
+          email,
+          password,
+          options: { data: { full_name: name } }
+        });
+        if (error) throw error;
+        alert('Conta criada! Verifique seu email.');
+      } catch (err) {
+        alert('Erro: ' + err.message);
+      }
+    });
+
+    // Magic link
+    document.getElementById('form-magic')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = e.target.email.value;
+
+      if (!CONFIG.isSupabaseEnabled) {
+        alert('Magic Link disponível apenas com Supabase configurado.');
+        return;
+      }
+
+      try {
+        const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
+        const sb = createClient(CONFIG.supabase.url, CONFIG.supabase.anonKey);
+        const { error } = await sb.auth.signInWithOtp({
+          email,
+          options: { emailRedirectTo: window.location.origin }
+        });
+        if (error) throw error;
+        document.getElementById('form-magic').style.display = 'none';
+        document.getElementById('magic-success').style.display = 'block';
+      } catch (err) {
+        alert('Erro: ' + err.message);
+      }
+    });
+  </script>
+</body>
+</html>

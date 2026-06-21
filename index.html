@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="description" content="Ebook interativo sobre TDAH: entenda seu cérebro, organize sua rotina e descubra estratégias baseadas em evidências.">
+
+  <!-- CSP restritiva - whitelist explícita de domínios -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://*.supabase.co;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    connect-src 'self' https://*.supabase.co https://*.cakto.com.br;
+    img-src 'self' data: blob: https://*.supabase.co;
+    frame-src https://*.cakto.com.br;
+    manifest-src 'self';
+    worker-src 'self';
+  ">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <title>Carregando Ebook...</title>
+
+  <!-- Supabase SDK (opcional - só carrega se configurado) -->
+  <script>
+    window.__EBOOK_CONFIG = null;
+    // Título dinâmico será definido pelo generator.js
+  </script>
+</head>
+<body>
+  <!-- Skip link para acessibilidade -->
+  <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
+
+  <!-- Disclaimer médico fixo (dinâmico via JS) -->
+  <div class="disclaimer-bar" id="disclaimer-bar" role="banner" aria-label="Aviso médico">
+    <span class="disclaimer-icon">⚕️</span>
+    <p id="disclaimer-text">Este conteúdo é educativo e não substitui orientação médica profissional. Sempre converse com seu médico antes de qualquer decisão sobre tratamento.</p>
+    <button class="disclaimer-close" aria-label="Fechar aviso" onclick="this.parentElement.remove()">✕</button>
+  </div>
+
+  <!-- App Shell -->
+  <div id="app" class="app-container">
+    <!-- Header -->
+    <header class="app-header" role="banner">
+      <div class="header-brand">
+        <div class="logo">
+          <span class="logo-icon">🧠</span>
+          <span class="logo-text">TDAH <em>Descomplicado</em></span>
+        </div>
+        <button class="btn-icon" id="theme-toggle" aria-label="Alternar tema claro/escuro">
+          <span class="theme-icon-light">☀️</span>
+          <span class="theme-icon-dark">🌙</span>
+        </button>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="progress-track" role="progressbar" aria-label="Progresso de leitura" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+      </div>
+    </header>
+
+    <!-- Navigation Drawer (mobile) / Sidebar (desktop) -->
+    <nav class="nav-drawer" id="nav-drawer" role="navigation" aria-label="Navegação do ebook">
+      <div class="nav-header">
+        <span class="nav-title">Sumário</span>
+        <button class="btn-icon nav-close" id="nav-close" aria-label="Fechar menu">✕</button>
+      </div>
+      <ul class="nav-list" id="nav-list" role="list">
+        <!-- Populated by JS -->
+      </ul>
+      <div class="nav-footer">
+        <button class="btn btn-outline btn-small" id="btn-download-pdf">
+          📥 Salvar PDF
+        </button>
+      </div>
+    </nav>
+
+    <!-- Overlay para mobile -->
+    <div class="nav-overlay" id="nav-overlay"></div>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content" role="main" tabindex="-1">
+      <!-- Toolbar de leitura -->
+      <div class="reading-toolbar">
+        <button class="btn-icon" id="btn-menu" aria-label="Abrir menu de navegação">
+          ☰
+        </button>
+        <div class="breadcrumb" id="breadcrumb" aria-label="Localização no ebook">
+          <span>Capítulo 1</span>
+        </div>
+        <div class="toolbar-actions">
+          <button class="btn-icon" id="btn-bookmark" aria-label="Adicionar marcador">
+            🔖
+          </button>
+          <button class="btn-icon" id="btn-text-size" aria-label="Tamanho do texto">
+            Aa
+          </button>
+          <button class="btn-icon" id="btn-glossary" aria-label="Abrir glossário">
+            📖
+          </button>
+        </div>
+      </div>
+
+      <!-- Área de conteúdo -->
+      <article class="content-area" id="content-area" aria-live="polite">
+        <!-- Populated by JS from data.js -->
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Carregando conteúdo...</p>
+        </div>
+      </article>
+
+      <!-- Navigation entre páginas -->
+      <nav class="page-nav" aria-label="Navegação entre páginas">
+        <button class="btn btn-outline" id="btn-prev" aria-label="Página anterior">
+          ← Anterior
+        </button>
+        <span class="page-indicator" id="page-indicator" aria-live="polite">
+          1 / 32
+        </span>
+        <button class="btn btn-primary" id="btn-next" aria-label="Próxima página">
+          Próxima →
+        </button>
+      </nav>
+    </main>
+  </div>
+
+  <!-- Modal: Glossário -->
+  <dialog class="modal" id="glossary-modal" aria-labelledby="glossary-title">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="glossary-title">📖 Glossário</h2>
+        <button class="btn-icon modal-close" aria-label="Fechar glossário">✕</button>
+      </div>
+      <div class="modal-body">
+        <input
+          type="search"
+          class="search-input"
+          id="glossary-search"
+          placeholder="Buscar termo..."
+          aria-label="Buscar no glossário"
+        >
+        <dl class="glossary-list" id="glossary-list">
+          <!-- Populated by JS -->
+        </dl>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Modal: Quiz -->
+  <dialog class="modal" id="quiz-modal" aria-labelledby="quiz-title">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="quiz-title">🎯 Quiz Interativo</h2>
+        <button class="btn-icon modal-close" aria-label="Fechar quiz">✕</button>
+      </div>
+      <div class="modal-body" id="quiz-body">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Modal: Auth Gateway (Paywall) -->
+  <dialog class="modal modal-large" id="auth-modal" aria-labelledby="auth-title">
+    <div class="modal-content">
+      <div class="auth-gateway" id="auth-gateway">
+        <!-- Populated by integrations.js -->
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Toast container -->
+  <div class="toast-container" id="toast-container" role="status" aria-live="polite"></div>
+
+  <!-- Vendor libs (local, não CDN) -->
+  <script src="js/vendor/chart.min.js" defer></script>
+  <script src="js/vendor/jspdf.umd.min.js" defer></script>
+
+  <!-- App modules -->
+  <script type="module">
+    import { CONFIG } from './js/config.js';
+
+    async function boot() {
+      try {
+        // Carrega app (que internamente carrega dados do briefing)
+        const app = await import('./js/main-controller.js');
+        await app.init();
+
+        // Atualiza título dinamicamente
+        const titleEl = document.querySelector('title');
+        if (titleEl && titleEl.textContent === 'Carregando Ebook...') {
+          // O app.js atualizará o título após carregar os dados
+        }
+
+        // Carrega Supabase (se configurado)
+        if (CONFIG.isSupabaseEnabled) {
+          const script = document.createElement('script');
+          script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+          script.onload = async () => {
+            const integrations = await import('./js/integrations.js');
+            await integrations.initIntegrations();
+          };
+          document.head.appendChild(script);
+        }
+      } catch (err) {
+        console.error('[boot] Erro:', err);
+        document.getElementById('content-area').innerHTML = `
+          <div class="error-state">
+            <p>❌ Erro ao carregar o ebook.</p>
+            <p style="font-size:0.8rem;color:var(--text-muted);margin-top:1rem;">${err.message}</p>
+          </div>
+        `;
+      }
+    }
+
+    boot();
+  </script>
+</body>
+</html>
