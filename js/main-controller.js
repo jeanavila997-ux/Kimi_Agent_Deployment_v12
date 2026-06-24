@@ -224,24 +224,55 @@ function closeNav() {
 function setupNavigation() {
   if (!$.navList) return;
 
-  $.navList.innerHTML = getPages().map((page, index) => {
-    const isActive = index === state.currentPage;
-    const isChapter = page.type === 'chapter-cover';
-    const icon = isChapter ? '📑' : (page.type === 'quiz' ? '🎯' : '📄');
+  const pages = getPages();
+  const structure = getStructure();
+  const chapters = structure.chapters || [];
+
+  // Group pages by chapterId
+  const pagesByChapter = {};
+  pages.forEach((page, index) => {
+    const cid = page.chapterId || 'unknown';
+    if (!pagesByChapter[cid]) {
+      pagesByChapter[cid] = [];
+    }
+    pagesByChapter[cid].push({ page, index });
+  });
+
+  $.navList.innerHTML = chapters.map(chapter => {
+    const chapPages = pagesByChapter[chapter.id] || [];
+    if (chapPages.length === 0) return '';
+
+    const pagesHtml = chapPages.map(({ page, index }) => {
+      const isActive = index === state.currentPage;
+      const isChapter = page.type === 'chapter-cover';
+      const icon = isChapter ? '📑' : (page.type === 'quiz' ? '🎯' : '📄');
+      const displayTitle = isChapter ? 'Capa / Introdução' : page.title;
+
+      return `
+        <li>
+          <button
+            class="${isActive ? 'active' : ''}"
+            data-page="${index}"
+            onclick="window.__navigateTo(${index})"
+          >
+            <span class="nav-item-number">${icon}</span>
+            <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${displayTitle}">
+              ${displayTitle}
+            </span>
+            <span class="nav-item-type">${isChapter ? 'Capa' : (page.type === 'quiz' ? 'Quiz' : page.number)}</span>
+          </button>
+        </li>
+      `;
+    }).join('');
 
     return `
-      <li>
-        <button
-          class="${isActive ? 'active' : ''}"
-          data-page="${index}"
-          onclick="window.__navigateTo(${index})"
-        >
-          <span class="nav-item-number">${icon}</span>
-          <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
-            ${page.title}
-          </span>
-          <span class="nav-item-type">${isChapter ? 'Cap' : (page.type === 'quiz' ? 'Quiz' : page.number)}</span>
-        </button>
+      <li class="nav-chapter-item">
+        <div class="nav-chapter-header">
+          ${chapter.title}: ${chapter.subtitle}
+        </div>
+        <ul class="nav-chapter-pages">
+          ${pagesHtml}
+        </ul>
       </li>
     `;
   }).join('');
@@ -280,8 +311,9 @@ function goNext() {
 }
 
 function updateNavActive() {
-  $.navList?.querySelectorAll('button').forEach((btn, i) => {
-    btn.classList.toggle('active', i === state.currentPage);
+  $.navList?.querySelectorAll('button').forEach((btn) => {
+    const pageIndex = parseInt(btn.dataset.page);
+    btn.classList.toggle('active', pageIndex === state.currentPage);
   });
 }
 
