@@ -1,0 +1,300 @@
+{
+  "_template": "PROMPT_MESTRE v1.0 — Template Universal de eBook PWA",
+  "_instrucoes": "Altere os campos abaixo para gerar um eBook sobre qualquer tema. Mantenha a estrutura JSON intacta.",
+
+  "ebook": {
+    "tema": "TDAH na Vida Real",
+    "nicho": "Saúde mental e organização pessoal",
+    "publico_alvo": "Adultos (especialmente mulheres 25-45) com dificuldade de foco, rotina e produtividade",
+    "problema_principal": "Falta de compreensão sobre o próprio cérebro, culpa excessiva, rotina caótica, subdiagnóstico",
+    "objetivo": "Explicar o TDAH de forma simples e entregar estratégias práticas organizadas",
+    "transformacao_prometida": "O leitor vai entender como seu cérebro funciona, parar de se culpar, e ter ferramentas concretas para organizar a rotina",
+    "nivel_conteudo": "Iniciante",
+    "tom_de_linguagem": "Educativo, humano, simples, direto, acolhedor, não prescritivo",
+    "num_capitulos": 8,
+    "num_paginas_estimado": "25-40",
+    "monetizacao": "Isca digital + venda de planner complementar",
+    "cta_final": "Entrar no grupo ou baixar um planner complementar",
+    "plataforma_venda": "Cakto / Kiwify",
+    "formato_entrega": "PDF + PWA interativo",
+    "disclaimer_medico": true,
+    "disclaimer_texto": "Este conteúdo é educativo e não substitui orientação médica profissional. Sempre converse com seu médico antes de qualquer decisão sobre tratamento.",
+    "preco_brl": 47.00,
+    "preco_original_brl": 97.00
+  },
+
+  "capa": {
+    "titulo_principal": "TDAH Descomplicado",
+    "subtitulo": "Entenda Seu Cérebro, Organize Sua Rotina e Viva com Mais Leveza",
+    "icone": "🧠",
+    "cores": {
+      "primaria": "#0ea5e9",
+      "secundaria": "#06b6d4",
+      "fundo": "#0f172a",
+      "fundo_claro": "#f8fafc",
+      "texto": "#f8fafc",
+      "texto_claro": "#0f172a"
+    },
+    "estilo_visual": "Moderno, limpo, com gradientes suaves. Tipografia serif para títulos (Playfair Display) e sans-serif para corpo (Inter).",
+    "sensacao": "Acolhedora, profissional, sem julgamentos. O leitor deve se sentir compreendido.",
+    "frase_impacto": "Seu cérebro funciona diferente — e isso é OK."
+  },
+
+  "posicionamento": {
+    "para_quem": "Adultos que desconfiam ter TDAH ou foram diagnosticados recentemente e não sabem por onde começar",
+    "problema_resolvido": "A falta de compreensão sobre o próprio cérebro e a ausência de estratégias práticas para o dia a dia",
+    "transformacao": "De confuso e autocrítico para informado, com ferramentas e uma visão mais gentil sobre si mesmo",
+    "objecao_principal": "'Isso vai ser mais um texto genérico que não me ajuda na prática'",
+    "diferencial": "Conteúdo validado por evidências científicas, escrito em linguagem humana, com estratégias testadas e organizadas em passos práticos",
+    "uso_comercial": "Isca digital para captura de leads (WhatsApp/email) e produto de baixo custo para venda direta"
+  },
+
+  "estrutura_capitulos": [
+    {
+      "numero": 1,
+      "titulo": "O que é TDAH?",
+      "subtitulo": "Compreendendo o Transtorno do Neurodesenvolvimento",
+      "icone": "🧠",
+      "tipo": "introducao",
+      "conteudo": {
+        "definicao": "O TDAH é um transtorno do neurodesenvolvimento que afeta o funcionamento do sistema nervoso central desde a infância, alterando a forma como o cérebro regula a atenção, o controle dos impulsos e a atividade motora.",
+        "prevalencia": "5-8% das crianças e 2,5-4% dos adultos globalmente",
+        "tipos": [
+          { "nome": "Predominantemente Desatento", "descricao": "Dificuldade de foco, esquecimentos frequentes, perde objetos, parece 'no mundo da lua'" },
+          { "nome": "Predominantemente Hiperativo-Impulsivo", "descricao": "Agitação, dificuldade de ficar parado, age sem pensar, fala muito" },
+          { "nome": "Combinado", "descricao": "Apresenta sintomas significativos dos dois tipos anteriores — é o mais comum" }
+        ],
+        "destaques": [
+          "O TDAH é um dos transtornos psiquiátricos mais estudados da medicina moderna. A primeira descrição clínica data de 1902.",
+          "O TDAH não desaparece na adolescência. Muitos adultos carregam o diagnóstico por décadas sem nunca terem recebido ajuda.",
+          "Mulheres com TDAH são frequentemente invisibilizadas — os critérios de diagnóstico foram desenvolvidos baseados em meninos hiperativos."
+        ],
+        "has_quiz": true,
+        "quiz_titulo": "Você se identifica?",
+        "quiz_perguntas": [
+          { "texto": "Com que frequência você tem dificuldade de manter a atenção em tarefas longas?", "tipo": "likert" },
+          { "texto": "Você se distrai facilmente com estímulos externos?", "tipo": "likert" },
+          { "texto": "Você tende a procrastinar com tarefas que exigem esforço mental sustentado?", "tipo": "likert" },
+          { "texto": "Você perde objetos com frequência?", "tipo": "likert" },
+          { "texto": "Você evita ou adia iniciar tarefas 'chatas'?", "tipo": "likert" },
+          { "texto": "Você se sente frequentemente impaciente com atrasos ou esperas?", "tipo": "likert" },
+          { "texto": "Sua mente parece sempre ocupada, mil pensamentos ao mesmo tempo?", "tipo": "likert" }
+        ]
+      }
+    },
+    {
+      "numero": 2,
+      "titulo": "O Cérebro com TDAH",
+      "subtitulo": "Neurobiologia, Neurotransmissores e o Mecanismo por Trás dos Sintomas",
+      "icone": "⚡",
+      "tipo": "fundamentos",
+      "conteudo": {
+        "regioes_cerebrais": [
+          { "nome": "Córtex Pré-frontal", "emoji": "🎯", "funcao": "Função executiva: planejamento, tomada de decisão, controle de impulsos e regulação emocional. Desenvolve mais lentamente em TDAH (atraso de 2-3 anos)." },
+          { "nome": "Estriado / Núcleo Accumbens", "emoji": "💾", "funcao": "Centro da motivação e recompensa. Menos receptores de dopamina disponíveis — por isso tarefas 'chatas' parecem impossíveis." },
+          { "nome": "Cerebelo e DMN", "emoji": "🌊", "funcao": "A Default Mode Network não desliga adequadamente quando precisamos focar, criando a 'mente divagante' constante." }
+        ],
+        "neurotransmissores": [
+          { "nome": "Dopamina", "funcao": "Motivação, recompensa, foco", "no_tdah": "Reduzida na fenda sináptica" },
+          { "nome": "Norepinefrina", "funcao": "Alerta, atenção, vigília", "no_tdah": "Regulação deficiente" },
+          { "nome": "Serotonina", "funcao": "Humor, impulsividade", "no_tdah": "Pode estar alterada (comorbidade)" },
+          { "nome": "GABA", "funcao": "Inibição, controle de impulsos", "no_tdah": "Reduzido no córtex pré-frontal" }
+        ],
+        "has_tabela": true
+      }
+    },
+    {
+      "numero": 3,
+      "titulo": "TDAH na Rotina Diária",
+      "subtitulo": "Como o Transtorno Afeta o Dia a Dia e o Que Você Pode Fazer",
+      "icone": "📅",
+      "tipo": "pratica",
+      "conteudo": {
+        "timeline_dia": [
+          { "hora": "Manhã", "titulo": "A Guerra de Acordar", "descricao": "O sono do TDAH é frequentemente perturbado. Acordar é difícil porque o cérebro não produz cortisol da manhã adequadamente." },
+          { "hora": "Trabalho", "titulo": "Foco Intermitente", "descricao": "Reuniões longas são tortura. Interrupções destroem o fluxo. Mas quando algo é interessante, o hiperfoco produz mais em 2 horas do que colegas em um dia." },
+          { "hora": "Tarde", "titulo": "O Crash", "descricao": "A energia mental acaba. Decisões simples parecem esmagadoras. Isso é chamado de paralisia por decisão — o córtex pré-frontal está esgotado." },
+          { "hora": "Noite", "titulo": "O Cérebro Acorda", "descricao": "Quando o mundo para, o cérebro do TDAH liga. Mil ideias, projetos, preocupações. Dormir é difícil porque a mente não desliga." }
+        ],
+        "sintomas_invisiveis": [
+          { "titulo": "Hiperatividade Mental", "emoji": "🧠", "descricao": "A mente nunca para. É como ter 20 abas abertas no navegador mental — e todas tocando música ao mesmo tempo." },
+          { "titulo": "Disforia Sensível à Rejeição (RSD)", "emoji": "😰", "descricao": "Uma mensagem mal interpretada pode gerar angústia por horas. Hipersensibilidade extrema a críticas reais ou percebidas." },
+          { "titulo": "Culpa e Autocrítica Crônica", "emoji": "😔", "descricao": "'Por que eu não consigo fazer coisas simples que todo mundo faz?' A autocrítica constante mina a autoestima ao longo dos anos." },
+          { "titulo": "Cansaço Mental Crônico", "emoji": "🔋", "descricao": "Manter o foco exige um esforço muito maior. Ao final do dia, o cansaço é real e profundo." },
+          { "titulo": "Máscara Social", "emoji": "🎭", "descricao": "Um personagem organizado e calmo que é exaustivo manter. Quando chegam em casa, o colapso emocional é frequente." }
+        ],
+        "has_quiz": true,
+        "quiz_titulo": "Seu Perfil de Sintomas"
+      }
+    },
+    {
+      "numero": 4,
+      "titulo": "Foco, Procrastinação e Hiperfoco",
+      "subtitulo": "Estratégias Práticas para o Dia a Dia",
+      "icone": "🎯",
+      "tipo": "solucoes",
+      "conteudo": {
+        "topicos": [
+          {
+            "titulo": "O Hiperfoco: Superpoder e Kriptonita",
+            "texto": "Quando o cérebro com TDAH encontra algo estimulante, ele mergulha com intensidade impressionante — perdendo a noção do tempo. O problema? Não se pode controlar quando acontece.",
+            "destaque": "O hiperfoco é uma experiência de fluxo profundo onde o mundo exterior deixa de existir."
+          },
+          {
+            "titulo": "Por que a procrastinação não é preguiça",
+            "lista": [
+              "Iniciação de tarefas: o 'motor de partida' do cérebro com TDAH é defeituoso",
+              "Sobrecarga: uma tarefa grande sem passos claros parece um monólito intransponível",
+              "Perfeccionismo paralisante: medo de não fazer perfeitamente → não faz nada",
+              "Recompensa atrasada: o cérebro precisa de recompensa imediata",
+              "Transições difíceis: parar o que está fazendo para começar outra coisa exige esforço enorme"
+            ]
+          },
+          {
+            "titulo": "Técnica Pomodoro (Adaptada)",
+            "texto": "A técnica clássica sugere 25 minutos de foco + 5 de pausa. Para TDAH, inverta: comece com 10 minutos de foco + 5 de pausa. O importante é começar, não durar.",
+            "passos": ["Escolha UMA tarefa (só uma)", "Defina um timer por 10-15 minutos", "Trabalhe até o timer tocar", "Pausa de 5 minutos (obrigatória!)", "A cada 4 ciclos, pausa longa de 15-30 min"]
+          },
+          {
+            "titulo": "Decomposição de Tarefas",
+            "texto": "Quebre tarefas em micro-passos tão pequenos que parecem ridículos. 'Escrever relatório' vira: abrir o documento → escrever o título → escrever uma frase → continuar..."
+          },
+          {
+            "titulo": "Body Doubling",
+            "texto": "Trabalhar na presença de outra pessoa (presencial ou virtual) aumenta a dopamina ambiental. A presença de outro ser humano funciona como 'âncora de atenção'."
+          },
+          {
+            "titulo": "Urgência Artificial",
+            "texto": "Crie prazos falsos. Comprometa-se com outra pessoa. Use timers visíveis. O cérebro com TDAH responde a urgência — então crie urgência para tarefas importantes.",
+            "destaque": "A regra dos 2 minutos: se uma tarefa leva menos de 2 minutos, faça agora. Não coloque na lista. Só faça."
+          }
+        ]
+      }
+    },
+    {
+      "numero": 5,
+      "titulo": "Emoções e TDAH",
+      "subtitulo": "Desregulação Emocional, RSD e Como Lidar",
+      "icone": "💜",
+      "tipo": "emocional",
+      "conteudo": {
+        "topico_principal": "Desregulação emocional: emoções que chegam com muita intensidade, rapidamente, e que demoram a passar. Uma crítica pequena pode parecer devastadora.",
+        "estatistica": "Até 70% dos adultos com TDAH apresentam desregulação emocional significativa.",
+        "caracteristicas": [
+          "Reatividade emocional: reações rápidas e intensas a estímulos",
+          "Disforia sensível à rejeição (RSD): hipersensibilidade extrema a críticas",
+          "Labilidade: mudanças rápidas de humor",
+          "Baixa tolerância à frustração",
+          "Irritabilidade frequente e desproporcional"
+        ],
+        "cards_rsd": [
+          { "titulo": "Pessoas-queixo", "emoji": "🙈", "descricao": "Evitam situações onde podem ser julgadas. Não perguntam no trabalho, não expõem ideias. A vida fica pequena, mas 'segura'." },
+          { "titulo": "Pessoas-raiva", "emoji": "😤", "descricao": "Reagem com raiva ou defensividade a qualquer sinal de crítica. Na verdade, estão se protegendo de uma dor emocional avassaladora." },
+          { "titulo": "Pessoas-máscara", "emoji": "🎭", "descricao": "Desenvolvem um personagem perfeito para evitar qualquer possibilidade de rejeição. A máscara é exaustiva e leva ao burnout." }
+        ],
+        "estrategias_rsd": [
+          "Terapia: TCC e ACT são especialmente eficazes",
+          "Mindfulness: ajuda a criar espaço entre o gatilho e a reação",
+          "Medicamentos: guanfacina, clonidina, antidepressivos (com médico)",
+          "Psicoeducação: entender que é RSD — não falha pessoal",
+          "Compaixão própria: tratar-se com a mesma gentileza que teria com uma amiga"
+        ]
+      }
+    },
+    {
+      "numero": 6,
+      "titulo": "Medicamentos: O Que Você Precisa Saber",
+      "subtitulo": "Estimulantes, Não-Estimulantes e Como Funcionam",
+      "icone": "💊",
+      "tipo": "tecnico",
+      "conteudo": {
+        "disclaimer_destaque": "Este capítulo tem caráter exclusivamente educativo. A decisão sobre medicamentos deve ser feita com um psiquiatra qualificado. Nunca inicie, altere ou pare medicamentos sem orientação médica.",
+        "tipos_medicamentos": [
+          { "categoria": "Estimulantes", "exemplos": "Metilfenidato (Ritalina, Concerta), Lisdexanfetamina (Venvanse)", "mecanismo": "Aumentam dopamina e norepinefrina no córtex pré-frontal" },
+          { "categoria": "Não-estimulantes", "exemplos": "Atomoxetina (Strattera), Guanfacina (Intuniv)", "mecanismo": "Aumentam norepinefrina ou modulam receptores alfa-2A" },
+          { "categoria": "Off-label", "exemplos": "Bupropiona, Venlafaxina", "mecanismo": "Ação sobre dopamina/norepinefrina (antidepressivos)" }
+        ],
+        "mitos": [
+          { "mito": "'Vicia'", "realidade": "Pessoas com TDAH que tomam estimulantes têm MENOR risco de abuso de substâncias na vida adulta." },
+          { "mito": "'Muda a personalidade'", "realidade": "O medicamento permite que você seja mais quem você é — removendo a barreira da disregulação atencional." },
+          { "mito": "'É apenas para crianças'", "realidade": "O TDAH é uma condição de vida toda. Medicamentos são tão eficazes em adultos quanto em crianças." },
+          { "mito": "'Não precisa de receita'", "realidade": "Estimulantes são controlados por lei e exigem receita especial (Notificação de Receita A)." }
+        ],
+        "efeitos_colaterais": ["Perda de apetite (geralmente melhora após semanas)", "Dificuldade para dormir se tomado tarde", "Boca seca", "Cefaleia leve nos primeiros dias" ]
+      }
+    },
+    {
+      "numero": 7,
+      "titulo": "Estratégias Práticas",
+      "subtitulo": "Sistema Completo para Organizar Sua Vida com TDAH",
+      "icone": "🛠️",
+      "tipo": "acao",
+      "conteudo": {
+        "sistema_organizacao": [
+          { "passo": 1, "titulo": "Sistema de Captura", "descricao": "Tenha UM lugar para capturar tudo: ideias, tarefas, compromissos. Pode ser um caderno, app ou notas no celular. Quando algo surge, capture imediatamente." },
+          { "passo": 2, "titulo": "Revisão Diária (5 minutos)", "descricao": "Todo dia, no mesmo horário, revise sua lista. Escolha apenas 3 prioridades para o dia. Três. Não dez." },
+          { "passo": 3, "titulo": "Ambiente Visual", "descricao": "O cérebro com TDAH precisa VER para lembrar. Use quadros visuais, post-its, alarmes com nomes descritivos. Torne o invisível visível." },
+          { "passo": 4, "titulo": "Rotina de Gatilhos", "descricao": "Associe tarefas a gatilhos existentes: 'depois que tomo café, organizo a mochila'. Não pense — só execute." }
+        ],
+        "plano_7_dias": [
+          { "dia": 1, "titulo": "Observe", "descricao": "Anote 3 situações em que o TDAH atrapalhou seu dia. Sem julgamentos, apenas observação." },
+          { "dia": 2, "titulo": "Organize o ambiente", "descricao": "Escolha um espaço e organize só ele. Defina um lugar fixo para chaves e carteira." },
+          { "dia": 3, "titulo": "Crie sua lista de 3 prioridades", "descricao": "Escolha apenas 3 prioridades para o dia e foque nelas." },
+          { "dia": 4, "titulo": "Ative lembretes", "descricao": "Configure alarmes no celular para compromissos, tarefas e até para beber água." },
+          { "dia": 5, "titulo": "Divida uma tarefa grande", "descricao": "Pegue algo que vem adiando e quebre em 5 etapas menores. Faça apenas a primeira hoje." },
+          { "dia": 6, "titulo": "Revise sua rotina", "descricao": "O que funcionou essa semana? O que não funcionou? Anote honestamente e sem autocrítica." },
+          { "dia": 7, "titulo": "Ajuste e celebre", "descricao": "Ajuste o que não funcionou e celebre qualquer progresso, por menor que seja. Progresso é progresso." }
+        ],
+        "has_quiz": true,
+        "quiz_titulo": "Qual Estratégia é Ideal para Você?",
+        "quiz_opcoes": [
+          { "texto": "Não consigo começar tarefas", "resultado": "pomodoro", "mensagem": "A Técnica Pomodoro é ideal para você! Comece com 10 minutos de foco + 5 de pausa." },
+          { "texto": "Me sinto sobrecarregada com tarefas grandes", "resultado": "decomposicao", "mensagem": "Use a Decomposição de Tarefas! Quebre tudo em micro-passos de 2-5 minutos." },
+          { "texto": "Esqueço compromissos e prazos", "resultado": "lembretes", "mensagem": "Configure lembretes visuais e alarmes descritivos no celular! Torne tudo visível." },
+          { "texto": "Não consigo manter organização", "resultado": "ambiente", "mensagem": "Organize seu ambiente! Uma mesa limpa e um lugar fixo para tudo mudam o jogo." },
+          { "texto": "Tenho dificuldade com transições", "resultado": "ritual", "mensagem": "Crie Rituais de Transição! Associe tarefas a gatilhos existentes (ex: após o café)." }
+        ]
+      }
+    },
+    {
+      "numero": 8,
+      "titulo": "Neuroplasticidade: O Cérebro que se Reescreve",
+      "subtitulo": "Como Fortalecer Seu Cérebro e Criar Novos Hábitos",
+      "icone": "✨",
+      "tipo": "conclusao",
+      "conteudo": {
+        "topico_principal": "Seu cérebro tem a capacidade de se reorganizar ao longo de toda a vida. Essa capacidade é chamada de neuroplasticidade — e ela é a chave para aprender, se adaptar e criar novos hábitos, mesmo com TDAH.",
+        "pilares_neuroplasticidade": [
+          { "titulo": "Exercício Aeróbico", "emoji": "🏃‍♀️", "descricao": "150 minutos por semana aumentam o BDNF (fator neurotrófico) em até 300%. O BDNF é como um 'fertilizante' para o cérebro." },
+          { "titulo": "Mindfulness e Meditação", "emoji": "🧘‍♀️", "descricao": "Práticas de atenção plena aumentam a densidade de matéria cinzenta no hipocampo e córtex pré-frontal. Melhora em 8 semanas." },
+          { "titulo": "Sono de Qualidade", "emoji": "😴", "descricao": "7-9 horas por noite. Privação de sono reduz BDNF em até 30% e piora todos os sintomas de TDAH." },
+          { "titulo": "Aprendizado Constante", "emoji": "🎯", "descricao": "Novos idiomas, instrumentos, dança, jogos de estratégia. O princípio é 'use it or lose it' (use ou perca)." }
+        ],
+        "nootropicos_naturais": [
+          { "nome": "Omega-3 (DHA)", "descricao": "Componente estrutural do cérebro. Meta-análises mostram efeitos modestos mas consistentes." },
+          { "nome": "Lion's Mane", "descricao": "Cogumelo medicinal que aumenta NGF e BDNF. Estudos de 2023 mostram melhora cognitiva." },
+          { "nome": "Cafeína + L-teanina", "descricao": "Foco calmo sem ansiedade. 100mg cafeína + 200mg L-teanina é a dose com melhor evidência." }
+        ],
+        "has_cta_final": true,
+        "cta_titulo": "Parabéns por chegar até aqui!",
+        "cta_descricao": "Você completou o ebook TDAH Descomplicado. Esse conhecimento é poder — use-o para se compreender melhor e construir uma vida mais leve.",
+        "cta_beneficios": ["Acesso vitalício ao conteúdo atualizado", "Bônus: Planner TDAH em PDF", "Bônus: Guia de conversa com médico", "Comunidade exclusiva de leitores" ]
+      }
+    }
+  ],
+
+  "glossario": [
+    { "termo": "TDAH", "categoria": "Diagnóstico", "definicao": "Transtorno de Déficit de Atenção e Hiperatividade. Condição neurobiológica que afeta atenção, controle de impulsos e atividade motora." },
+    { "termo": "Dopamina", "categoria": "Neurociência", "definicao": "Neurotransmissor central da motivação, recompensa e prazer. No TDAH, há disregulação dopaminérgica." },
+    { "termo": "Hiperfoco", "categoria": "Sintoma", "definicao": "Estado de foco intenso e prolongado em uma atividade de interesse. Pode durar horas com perda da noção de tempo." },
+    { "termo": "RSD", "categoria": "Sintoma", "definicao": "Rejection Sensitive Dysphoria — disforia sensível à rejeição. Hipersensibilidade extrema a críticas reais ou percebidas." },
+    { "termo": "DMN", "categoria": "Neurociência", "definicao": "Default Mode Network — rede neural ativa quando a mente 'divaga'. Em TDAH, não desliga adequadamente durante tarefas de foco." },
+    { "termo": "Função Executiva", "categoria": "Neurociência", "definicao": "Conjunto de habilidades cognitivas: planejamento, organização, controle de impulsos, memória de trabalho e flexibilidade mental." },
+    { "termo": "Neuroplasticidade", "categoria": "Neurociência", "definicao": "Capacidade do cérebro de se reorganizar formando novas conexões neurais ao longo da vida." },
+    { "termo": "BDNF", "categoria": "Neurociência", "definicao": "Brain-Derived Neurotrophic Factor — proteína que promove crescimento e sobrevivência de neurônios." },
+    { "termo": "Metilfenidato", "categoria": "Medicamento", "definicao": "Estimulante para TDAH (Ritalina, Concerta). Bloqueia recaptação de dopamina e norepinefrina." },
+    { "termo": "Lisdexanfetamina", "categoria": "Medicamento", "definicao": "Pró-droga estimulante (Venvanse). Convertida no organismo em dextroanfetamina. Efeito de 10-14 horas." }
+  ],
+
+  "_como_usar": "Para gerar um eBook sobre OUTRO tema: 1) Copie este arquivo, 2) Altere os campos no objeto 'ebook', 3) Reescreva os capítulos em 'estrutura_capitulos', 4) Atualize o glossário. O gerador em js/generator.js fará o resto."
+}

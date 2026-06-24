@@ -1,0 +1,39 @@
+{
+  "name": "tdah-descomplicado-ebook",
+  "version": "1.0.0",
+  "description": "Ebook interativo sobre TDAH: entenda seu cérebro, organize sua rotina e descubra estratégias baseadas em evidências.",
+  "type": "module",
+  "main": "js/main-controller.js",
+  "scripts": {
+    "dev": "http-server . -p 8000 -c-1",
+    "build": "npm run validate",
+    "validate": "node scripts/validate.js",
+    "test": "npm run validate",
+    "lint": "eslint js/",
+    "serve": "python -m http.server 8000"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.41.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.55.0",
+    "http-server": "^14.1.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "ebook",
+    "tdah",
+    "interactive",
+    "pwa",
+    "saúde",
+    "educação"
+  ],
+  "author": "Jean Avila",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeanavila997-ux/tdah-descomplicado-ebook"
+  }
+}
