@@ -9,16 +9,17 @@
 
 .card {
   background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
+  border: 2px solid var(--border-default);
+  border-radius: var(--radius-md);
   padding: var(--space-6);
+  box-shadow: 4px 4px 0px var(--border-default);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
 }
 
 .card-hover:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--border-default);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--color-primary-light);
+  border-color: var(--color-primary);
 }
 
 .card-header {
@@ -31,16 +32,21 @@
 .card-icon {
   width: 40px;
   height: 40px;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  color: var(--bg-body);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: var(--text-lg);
+  font-weight: 700;
+  border: 2px solid var(--border-default);
+  box-shadow: 2px 2px 0px var(--border-default);
   flex-shrink: 0;
 }
 
 .card-title {
+  font-family: var(--font-display);
   font-weight: 700;
   color: var(--text-primary);
 }
@@ -226,9 +232,10 @@
 
 .timeline-content {
   background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
+  border: 2px solid var(--border-default);
+  border-radius: var(--radius-md);
   padding: var(--space-5);
+  box-shadow: 3px 3px 0px var(--border-default);
 }
 
 .timeline-title {
@@ -460,8 +467,8 @@ tbody tr:hover {
 }
 
 .checklist-checkbox {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: var(--radius-sm);
   border: 2px solid var(--border-default);
   display: flex;
@@ -470,19 +477,30 @@ tbody tr:hover {
   flex-shrink: 0;
   margin-top: 2px;
   cursor: pointer;
-  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+  background: var(--bg-surface);
+  transition: all var(--transition-fast);
 }
 
 .checklist-checkbox.checked {
-  background: var(--color-success);
-  border-color: var(--color-success);
-  color: white;
+  background: var(--color-accent) !important;
+  border-color: var(--color-primary-dark) !important;
+  color: var(--bg-body) !important;
+  font-weight: 800;
+  box-shadow: 2px 2px 0px var(--color-primary-dark);
 }
 
 .checklist-text {
   color: var(--text-secondary);
   font-size: var(--text-sm);
   line-height: var(--line-height-normal);
+  transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+}
+
+.checklist-checkbox.checked + .checklist-text {
+  color: var(--text-muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--color-secondary-accent);
+  text-decoration-thickness: 2px;
 }
 
 /* ==========================================

@@ -114,6 +114,7 @@ export const STORAGE_KEYS = {
   bookmarks: 'tdah-ebook:bookmarks',
   fontSize: 'tdah-ebook:fontSize',
   quizResults: 'tdah-ebook:quizResults',
+  activeFocus: 'tdah-ebook:activeFocus',
   user: 'tdah-ebook:user',
   authToken: 'tdah-ebook:authToken',
   lastPage: 'tdah-ebook:lastPage',

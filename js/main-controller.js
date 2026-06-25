@@ -43,7 +43,8 @@ let state = {
   theme: getInitialTheme(),
   fontSize: parseInt(localStorage.getItem(STORAGE_KEYS.fontSize)) || 16,
   quizResults: JSON.parse(localStorage.getItem(STORAGE_KEYS.quizResults) || '[]'),
-  isNavOpen: false
+  isNavOpen: false,
+  activeFocus: localStorage.getItem(STORAGE_KEYS.activeFocus) === 'true'
 };
 
 // Referências DOM (cacheadas)
@@ -68,6 +69,7 @@ export async function init() {
   }
 
   setupTheme();
+  setupActiveFocus();
   setupEventListeners();
   setupNavigation();
   setupGlossary();
@@ -120,6 +122,7 @@ function cacheDOM() {
     btnBookmark: document.getElementById('btn-bookmark'),
     btnTextSize: document.getElementById('btn-text-size'),
     btnGlossary: document.getElementById('btn-glossary'),
+    btnActiveFocus: document.getElementById('btn-active-focus'),
     btnDownloadPdf: document.getElementById('btn-download-pdf'),
     themeToggle: document.getElementById('theme-toggle'),
     glossaryModal: document.getElementById('glossary-modal'),
@@ -136,6 +139,26 @@ function setupTheme() {
   $.themeToggle?.addEventListener('click', () => {
     state.theme = state.theme === 'dark' ? 'light' : 'dark';
     setTheme(state.theme);
+  });
+}
+
+// ==========================================
+// ACTIVE FOCUS MODE
+// ==========================================
+function setupActiveFocus() {
+  const updateFocusUI = () => {
+    const isActive = state.activeFocus;
+    $.btnActiveFocus?.classList.toggle('active', isActive);
+    $.contentArea?.classList.toggle('focus-active', isActive);
+  };
+
+  updateFocusUI();
+
+  $.btnActiveFocus?.addEventListener('click', () => {
+    state.activeFocus = !state.activeFocus;
+    localStorage.setItem(STORAGE_KEYS.activeFocus, state.activeFocus);
+    updateFocusUI();
+    showToast(state.activeFocus ? '⚡ Modo Foco Ativo habilitado!' : 'Modo Foco Ativo desabilitado.');
   });
 }
 
